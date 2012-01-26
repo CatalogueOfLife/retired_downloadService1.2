@@ -34,10 +34,10 @@ class IndexController extends BaseController
     	//Start background
     	$phpLocation = Bootstrap::instance()->getOption('includePaths.PHPLocation');
     	$bastPath = Bootstrap::instance()->getOption('includePaths.basePath');
-    	$newUrl = $bastPath.'/api/index/generateZipFile';
+    	$newUrl = $bastPath.'?module=api&controller=index&action=generateZipFile';
     	foreach($this->_getAllParams() as $key => $value) {
     		if($key != 'controller' && $key != 'action' && $key != 'module') {
-	    		$newUrl .= "/$key/$value";
+	    		$newUrl .= "&$key=$value";
     		}
     	}
     	$command = "$phpLocation $newUrl &";
