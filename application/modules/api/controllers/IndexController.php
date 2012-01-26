@@ -30,20 +30,18 @@ class IndexController extends BaseController
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/includes/library.php';
     	alwaysFlush();
     	
-		$len = strlen(json_encode($output));
-		header("Content-Length: $len");
     	echo json_encode($output);
     	//Start background
     	$phpLocation = Bootstrap::instance()->getOption('includePaths.PHPLocation');
     	$bastPath = Bootstrap::instance()->getOption('includePaths.basePath');
-    	$newUrl = '/home/dseijts/quickAndDirty.php';
-/*    	$newUrl = $bastPath.'/api/index/generateZipFile';
+    	$newUrl = $bastPath.'/api/index/generateZipFile';
     	foreach($this->_getAllParams() as $key => $value) {
-    		$newUrl .= "/$key/$value";
-    	}*/
-    	$command = "php $newUrl &";
+    		if($key != 'controller' && $key != 'action' && $key != 'module') {
+	    		$newUrl .= "/$key/$value";
+    		}
+    	}
+    	$command = "$phpLocation $newUrl &";
 		exec( "$command", $arrOutput );
-		echo $command;
     }
     
     public function generatezipfileAction ()
