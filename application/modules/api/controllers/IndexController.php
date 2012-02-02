@@ -34,33 +34,17 @@ class IndexController extends BaseController
     	//Start background
     	$phpLocation = Bootstrap::instance()->getOption('includePaths.PHPLocation');
     	$bastPath = Bootstrap::instance()->getOption('includePaths.basePath');
-    	$newUrl = $bastPath.'?module=api&controller=index&action=generateZipFile';
+    	$newUrl = $bastPath.'/scripts/createDCAExport.php';
     	foreach($this->_getAllParams() as $key => $value) {
     		if($key != 'controller' && $key != 'action' && $key != 'module') {
-	    		$newUrl .= "&$key=$value";
+	    		$newUrl .= " $value";
     		}
     	}
     	$command = "$phpLocation $newUrl &";
+    	die($command);
 		exec( "$command", $arrOutput );
     }
     
-    public function generatezipfileAction ()
-    {
-    	$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNoRender(TRUE);
-
-    	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
-    	$block = $this->_getParam('block');
-    	$_REQUEST = $this->_getAllParams();
-    	$DCAExporter = new DCAExporter($_REQUEST,$block);
-    	if(!$DCAExporter->archiveExists()) {
-	    	$DCAExporter->createMetaXml();
-	        $DCAExporter->writeData();
-		    $DCAExporter->zipArchive();
-    	}
-    	
-    }
-
     public function generateKeyAction ()
     {
         $domain = trim($this->_param('domain', null));
