@@ -41,7 +41,6 @@ class IndexController extends BaseController
     		}
     	}
     	$command = "$phpLocation $newUrl &";
-    	die($command);
 		exec( "$command", $arrOutput );
     }
     
