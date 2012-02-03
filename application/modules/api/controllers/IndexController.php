@@ -37,6 +37,9 @@ class IndexController extends BaseController
     	$newUrl = $bastPath.'/scripts/createDCAExport.php';
     	foreach($this->_getAllParams() as $key => $value) {
     		if($key != 'controller' && $key != 'action' && $key != 'module') {
+    			if($value == '') {
+    				$value = 'EMPTY';
+    			}
 	    		$newUrl .= " $value";
     		}
     	}

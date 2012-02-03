@@ -28,6 +28,9 @@ foreach($argv as $key => $value) {
 				$rank = 'genus';
 				break;
 		}
+		if($value == 'EMPTY') {
+			$value = '';
+		}
 		$_REQUEST[$rank] = $value;
 	} elseif (($key+1) == $arguments) {
 		$_REQUEST['block'] = $value;
