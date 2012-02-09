@@ -33,11 +33,16 @@ foreach($argv as $key => $value) {
 		}
 		$_REQUEST[$rank] = $value;
 	} elseif (($key+1) == $arguments) {
+		//Block level
 		$_REQUEST['block'] = $value;
+	} elseif (($key+2) == $arguments) {
+		//Version
+		$version = $value;
 	}
 }
-$DCAExporter = new DCAExporter($_REQUEST,$_REQUEST['block']);
+$DCAExporter = new DCAExporter($_REQUEST,$_REQUEST['block'],$version);
 $errors = $DCAExporter->getStartUpErrors();
+$DCAExporter->setVersion($version);
 if($DCAExporter->archiveExists()) {
 	echo "Archive already exists\n";
 } elseif (!empty($errors)) {

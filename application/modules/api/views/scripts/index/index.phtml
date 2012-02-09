@@ -1,9 +1,7 @@
 <h2>Welcome</h2>
 <p>
-	Welcome to the Web Services of the Catalogue of Life. Here you can find
-	information on which web services the Catalogue of Life offers, how you can
-	subscribe to them, and the technical details of calling the web services from
-	within your own application.
+	 Welcome to Download Service 1.2 of the Catalogue of Life. Here you can find
+    information on how to interact with the web service.
 </p>
 
 <h2>Subscribing</h2>
@@ -43,23 +41,38 @@
 </p>
 
 <h2>Description of currently available web services</h2>
-<h3>Web service 1</h3>
+<h3>Description</h3>
 <p>
-	Describes web service 1
+	Retrieves the URL of a zipped archive containing information about a current taxon
+	and its children. The web service can give three export or block options.
 </p>
 
-<h3>Web service 2</h3>
+<h3>Block options</h3>
 <p>
-	Describes web service 2
+	Block 1: Classification only. Exports the higher classification exclusively, without
+	species. Just from kingdom (or any selected taxa) down to genus.
+</p>
+<p>
+	Block 2: Limited data. Exports accepted scientific name linked to references,
+	synonym(s) linked to reference(s), latest taxonomic scrutiny, source database and
+	Catalogue of Life edition, classification above genus and LSID.
+</p>
+<p>
+	Block 3: Complete data. Exports fields as defined under 'Limited data', plus common
+	name(s) linked to reference(s), distribution, life zone and additional data.
 </p>
 
-<h3>Web service 3</h3>
+<h3>Usage</h3>
 <p>
-	Describes web service 4
+	Use the following syntax to query this web service:
+	[domain]/api/index/retrieveUrl/[loop][rank]/taxonName/[endLoop]/block/[blockLevel].
+	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family
+	and genus. An example is:
+	http://dev.4d4life.eu/DS1.2/api/index/retrieveUrl/kingdom/Animalia/phylum/Chordata/class/Aves/block/1
 </p>
-
-<h3>Web service 4</h3>
 <p>
-	Describes web service 4
+	The web service will return the URL that is/or will be available to download, plus a
+	boolean whether the URL is already accessible. As the zip file can take some time to
+	create, you will have to poll the web service from time to time to check if the zip
+	file has been created and the URL is accessible.
 </p>
-

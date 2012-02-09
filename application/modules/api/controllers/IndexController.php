@@ -13,14 +13,32 @@ class IndexController extends BaseController
     	$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender(TRUE);
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
+    	//Check for registration key
+    	$key = $this->_getParam('key');
+    	//Get version
+    	$version = $this->_getParam('version');
+    	$version = $this->_checkVersionAction($version);
+    	
     	$block = $this->_getParam('block');
-    	$_REQUEST = $this->_getAllParams();
+//    	$_REQUEST = $this->_getAllParams();
+        $_REQUEST = $this->_getAllParams();
+        if(!$block) {
+            $block = 1;
+            $_REQUEST['block'] = $block;
+        }
+        if(!$this->_getParam('kingdom') && !$this->_getParam('phylum') && !$this->_getParam('class') &&
+            !$this->_getParam('order') && !$this->_getParam('superfamily') && !$this->_getParam('family') &&
+            !$this->_getParam('genus')) {
+            die(json_encode(array('error' => 'no rank given')));
+        }
+    	
     	$DCAExporter = new DCAExporter($_REQUEST,$block);
-    	$zipArchiveName = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/' . $DCAExporter->getZipArchiveName();
+    	$zipArchiveName = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/zip/' . $DCAExporter->getZipArchiveName();
     	$keyExists = false;
     	if($DCAExporter->archiveExists()) {
     		$keyExists = true;
     	}
+    	unset($DCAExporter);
     	$output = array(
     		'url' => $zipArchiveName,
     		'urlExists' => $keyExists
@@ -37,14 +55,34 @@ class IndexController extends BaseController
     	$newUrl = $bastPath.'/scripts/createDCAExport.php';
     	foreach($this->_getAllParams() as $key => $value) {
     		if($key != 'controller' && $key != 'action' && $key != 'module') {
+    			//Does not force order...
     			if($value == '') {
     				$value = 'EMPTY';
     			}
 	    		$newUrl .= " $value";
     		}
     	}
-    	$command = "$phpLocation $newUrl &";
+    	$command = "$phpLocation $newUrl > /dev/null &";
 		exec( "$command", $arrOutput );
+    }
+    
+    public function getVersionsAction ()
+    {
+    	$versions = array (
+    		'bs_v19',
+			'deze_bestaaat_niet_echt'
+    	);
+    	return json_encode($versions);
+    }
+    
+    private function _checkVersionAction ($version)
+    {
+    	//Check if the given version exists.
+    	if($version) {
+	    	return $version;
+    	} else {
+    		return null;
+    	}
     }
     
     public function generateKeyAction ()
