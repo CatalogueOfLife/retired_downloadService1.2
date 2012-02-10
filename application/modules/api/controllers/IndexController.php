@@ -8,52 +8,95 @@ class IndexController extends BaseController
         // START HERE
     }
     
-    public function retrieveurlAction ()
+    public function partialdownloadserviceAction ()
     {
     	$this->_helper->layout->disableLayout();
-		$this->_helper->viewRenderer->setNoRender(TRUE);
+//		$this->_helper->viewRenderer->setNoRender(TRUE);
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
-    	//Check for registration key
+    	
+    	//Turn all Params into variabels;
+        $_REQUEST = $this->_getAllParams();
     	$key = $this->_getParam('key');
-    	//Get version
     	$version = $this->_getParam('version');
+    	$block = $this->_getParam('block');
+    	$fieldSet = $this->_getParam('field_set');
+    	$kingdom = $this->_getParam('kingdom');
+    	$phylum = $this->_getParam('phylum');
+    	$class = $this->_getParam('class');
+    	$order = $this->_getParam('order');
+    	$superfamily = $this->_getParam('superfamily');
+    	$family = $this->_getParam('family');
+    	$genus = $this->_getParam('genus');
+
+    	$this->view->params = $this->_getAllParams();
+    	$this->view->version = $version;
+    	$this->view->date = date('d M Y H:i:s e');
+    	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
+    	
+    	//Check for registration key
+    	if(!isset($key)) {
+    		$this->view->error = 'no key given';
+    		return;
+    	}
+    	//Check if the key exists
+    	if(!$this->_checkKeyExists($key)) {
+    		$this->view->error = 'the given key does not exists';
+    		return;
+    	}
+    	
+    	//Get version
     	$version = $this->_checkVersionAction($version);
     	
-    	$block = $this->_getParam('block');
 //    	$_REQUEST = $this->_getAllParams();
-        $_REQUEST = $this->_getAllParams();
+		if($fieldSet) {
+			switch ($fieldSet) {
+				case 'classification_only':
+				default:
+					$block = 1;
+					break;
+				case 'limited_data':
+					$block = 2;
+					break;
+				case 'complete_data':
+					$block = 3;
+					break;
+			}
+			$_REQUEST['block'] = $block;
+		}
         if(!$block) {
             $block = 1;
             $_REQUEST['block'] = $block;
         }
-        if(!$this->_getParam('kingdom') && !$this->_getParam('phylum') && !$this->_getParam('class') &&
-            !$this->_getParam('order') && !$this->_getParam('superfamily') && !$this->_getParam('family') &&
-            !$this->_getParam('genus')) {
-            die(json_encode(array('error' => 'no rank given')));
+        if(!$kingdom && !$phylum && !$class && $order && !$superfamily && $family && $genus) {
+//            die(json_encode(array('error' => 'no rank given')));
+			$this->view->error = 'no rank given';
+			return;
         }
     	
     	$DCAExporter = new DCAExporter($_REQUEST,$block);
     	$zipArchiveName = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/zip/' . $DCAExporter->getZipArchiveName();
-    	$keyExists = false;
+    	$zipExists = 'no';
     	if($DCAExporter->archiveExists()) {
-    		$keyExists = true;
+    		$zipExists = 'yes';
     	}
     	unset($DCAExporter);
-    	$output = array(
+/*    	$output = array(
     		'url' => $zipArchiveName,
     		'urlExists' => $keyExists
-    	);
-    	$frontController = Zend_Controller_Front::getInstance();
+    	);*/
+    	$this->view->url = $zipArchiveName;
+    	$this->view->urlExists = $zipExists;
+/*    	$frontController = Zend_Controller_Front::getInstance();
 		$frontController->setParam('disableOutputBuffering', true);
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/includes/library.php';
-    	alwaysFlush();
+    	alwaysFlush();*/
     	
-    	echo json_encode($output);
+//    	echo json_encode($output);
     	//Start background
     	$phpLocation = Bootstrap::instance()->getOption('includePaths.PHPLocation');
     	$bastPath = Bootstrap::instance()->getOption('includePaths.basePath');
     	$newUrl = $bastPath.'/scripts/createDCAExport.php';
-    	foreach($this->_getAllParams() as $key => $value) {
+    	/*foreach($this->_getAllParams() as $key => $value) {
     		if($key != 'controller' && $key != 'action' && $key != 'module') {
     			//Does not force order...
     			if($value == '') {
@@ -61,7 +104,17 @@ class IndexController extends BaseController
     			}
 	    		$newUrl .= " $value";
     		}
-    	}
+    	}*/
+    	$newUrl = $this->_getValue($version);
+    	$newUrl .= $this->_getValue($block);
+    	$newUrl .= $this->_getValue($kingdom);
+    	$newUrl .= $this->_getValue($phylum);
+        $newUrl .= $this->_getValue($class);
+        $newUrl .= $this->_getValue($order);
+        $newUrl .= $this->_getValue($superfamily);
+        $newUrl .= $this->_getValue($family);
+        $newUrl .= $this->_getValue($genus);
+        
     	$command = "$phpLocation $newUrl > /dev/null &";
 		exec( "$command", $arrOutput );
     }
@@ -75,6 +128,18 @@ class IndexController extends BaseController
     	return json_encode($versions);
     }
     
+    private function _getValue($value)
+    {
+    	if(isset($value)) {
+    		if($value == '') {
+    			return ' EMPTY';
+    		} else {
+	    		return ' ' . $value;
+    		}
+    	}
+    	return ' EMPTY';
+    }
+    
     private function _checkVersionAction ($version)
     {
     	//Check if the given version exists.
@@ -82,6 +147,15 @@ class IndexController extends BaseController
 	    	return $version;
     	} else {
     		return null;
+    	}
+    }
+    
+    private function _checkKeyExists ($key) {
+    	//Needs a real check
+    	if($key == $key) {
+	    	return true;
+    	} else {
+    		return false;
     	}
     }
     

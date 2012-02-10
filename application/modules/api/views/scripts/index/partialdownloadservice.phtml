@@ -1,0 +1,30 @@
+<?php echo $this->xmlheader; ?>
+
+<sp2000>
+	<request>
+		<service id='partialdownloadservice'></service>
+		<description>
+			i4Life download service to retrieve part of the Catalogue of Life
+			as DwC-a file. It may take a while before the file is constructed and be
+			available at the download url if it is not already in cache.
+		</description>
+		<parameters>
+<?php foreach($this->params as $param => $value): ?>
+			<<?php echo $param; ?>><?php echo $value; ?></<?php echo $param; ?>>
+<?php endforeach; ?>
+		</parameters>
+		<date><?php echo $this->date; ?></date>
+		<catalogue_version><?php echo $this->version; ?></catalogue_version>
+	</request>
+	<response>
+<?php if(isset($this->error)): ?>
+		<error><?php echo $this->error; ?></error>
+<?php else: ?>
+		<downloadurl><?php echo $this->url; ?></downloadurl>
+		<in_cache><?php echo $this->urlExists; ?></in_cache>
+<?php endif; ?>
+	</response>
+<?php if(!isset($this->error)): ?>
+	<status code='0'>Success</status>
+<?php endif; ?>
+</sp2000>
