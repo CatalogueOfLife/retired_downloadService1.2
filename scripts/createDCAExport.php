@@ -39,7 +39,6 @@ foreach($argv as $key => $value) {
 }
 $DCAExporter = new DCAExporter($_REQUEST,$_REQUEST['block'],$version);
 $errors = $DCAExporter->getStartUpErrors();
-$DCAExporter->setVersion($version);
 if($DCAExporter->archiveExists()) {
 	echo "Archive already exists\n";
 } elseif (!empty($errors)) {
