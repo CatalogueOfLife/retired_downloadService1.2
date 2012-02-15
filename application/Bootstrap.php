@@ -113,6 +113,33 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $autoLoader->setDefaultAutoloader(array($loader,'autoload'));
         return $autoLoader;
     }
+    
+    public function _initRouter ()
+    {
+    	$router = Zend_Controller_Front::getInstance()->getRouter();
+    	$router->addRoute(
+    		'partialdownloadservice',
+    		new Zend_Controller_Router_Route_Static(
+    			'partialdownloadservice',
+    			array(
+    				'module' => 'api',
+    				'controller' => 'index',
+    				'action' => 'partialdownloadservice'
+    			)
+    		)
+    	);
+    	$router->addRoute(
+    		'getversions',
+    		new Zend_Controller_Router_Route_Static(
+    			'getversions',
+    			array(
+    				'module' => 'api',
+    				'controller' => 'index',
+    				'action' => 'getversions'
+    			)
+    		)
+    	);
+    }
 
     /**
      * @return Zend_Session_Namespace
