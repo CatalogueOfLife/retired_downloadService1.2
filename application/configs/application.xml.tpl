@@ -64,6 +64,17 @@
 				<default>en_US</default>
 			</locale>
 
+
+			<!-- DATABASE -->
+			<multidb>
+				<db1>
+					<adapter>pdo_mysql</adapter>
+					<host>localhost</host>
+					<username>root</username>
+					<password></password>
+					<dbname>information_schema</dbname>
+				</db1>
+			</multidb>
 		</resources>
 
 		<constants>
