@@ -4,27 +4,27 @@ include_once '/home/dseijts/Zend/workspaces/DefaultWorkspace7/AC_DCA_export/DCAE
 $_REQUEST = $this->_getAllParams();*/
 $arguments = count($argv);
 foreach($argv as $key => $value) {
-	if($key != 0 && ($key+1) < $arguments) {
+	if($key != 0 && $key != 1 && ($key+1) < $arguments) {
 		switch ($key) {
-			case 1:
+			case 2:
 				$rank = 'kingdom';
 				break;
-			case 2:
+			case 3:
 				$rank = 'phylum';
 				break;
-			case 3:
+			case 4:
 				$rank = 'class';
 				break;
-			case 4:
+			case 5:
 				$rank = 'order';
 				break;
-			case 5:
+			case 6:
 				$rank = 'superfamily';
 				break;
-			case 6:
+			case 7:
 				$rank = 'family';
 				break;
-			case 7:
+			case 8:
 				$rank = 'genus';
 				break;
 		}
@@ -32,12 +32,9 @@ foreach($argv as $key => $value) {
 			$value = '';
 		}
 		$_REQUEST[$rank] = $value;
-	} elseif (($key+1) == $arguments) {
+	} elseif ($key == 1) {
 		//Block level
 		$_REQUEST['block'] = $value;
-	} elseif (($key+2) == $arguments) {
-		//Version
-		$version = $value;
 	}
 }
 $DCAExporter = new DCAExporter($_REQUEST,$_REQUEST['block'],$version);
