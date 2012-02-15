@@ -119,8 +119,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     	$router = Zend_Controller_Front::getInstance()->getRouter();
     	$router->addRoute(
     		'partialdownloadservice',
-    		new Zend_Controller_Router_Route_Static(
-    			'partialdownloadservice',
+    		new Zend_Controller_Router_Route(
+    			'partialdownloadservice/*',
     			array(
     				'module' => 'api',
     				'controller' => 'index',
