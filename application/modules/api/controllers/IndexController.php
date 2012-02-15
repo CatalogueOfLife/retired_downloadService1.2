@@ -105,7 +105,7 @@ class IndexController extends BaseController
 	    		$newUrl .= " $value";
     		}
     	}*/
-    	$newUrl .= $this->_getValue($version);
+//    	$newUrl .= $this->_getValue($version);
     	$newUrl .= $this->_getValue($block);
     	$newUrl .= $this->_getValue($kingdom);
     	$newUrl .= $this->_getValue($phylum);
