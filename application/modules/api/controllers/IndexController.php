@@ -94,8 +94,8 @@ class IndexController extends BaseController
 //    	echo json_encode($output);
     	//Start background
     	$phpLocation = Bootstrap::instance()->getOption('includePaths.PHPLocation');
-    	$bastPath = Bootstrap::instance()->getOption('includePaths.basePath');
-    	$newUrl = $bastPath.'/scripts/createDCAExport.php';
+    	$basePath = Bootstrap::instance()->getOption('includePaths.basePath');
+    	$newUrl = $basePath.'/scripts/createDCAExport.php';
     	/*foreach($this->_getAllParams() as $key => $value) {
     		if($key != 'controller' && $key != 'action' && $key != 'module') {
     			//Does not force order...
@@ -127,7 +127,11 @@ class IndexController extends BaseController
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
     	
-    	$this->view->versions = DCAExporter::getPreviousEditions();
+    	$this->view->versions = 
+    	$versions = DCAExporter::getPreviousEditions();
+    	foreach($versions as $key => $version) {
+    		$versions[$key]['url'] = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/' . $versions[$key]['url'];
+    	}
     }
     
     private function _getValue($value)
