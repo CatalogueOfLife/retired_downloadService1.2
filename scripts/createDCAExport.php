@@ -47,7 +47,9 @@ if($DCAExporter->archiveExists()) {
 		echo $error."\n";
 	}
 } else {
+	echo "Creating archive\n";
 	$DCAExporter->createMetaXml();
 	$DCAExporter->writeData();
 	$DCAExporter->zipArchive();
+	echo "done";
 }
