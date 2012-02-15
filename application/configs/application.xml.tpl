@@ -64,7 +64,6 @@
 				<default>en_US</default>
 			</locale>
 
-
 			<!-- DATABASE -->
 			<multidb>
 				<db1>
