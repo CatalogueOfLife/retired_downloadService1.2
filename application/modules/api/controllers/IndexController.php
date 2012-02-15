@@ -127,11 +127,11 @@ class IndexController extends BaseController
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
     	
-    	$this->view->versions = 
     	$versions = DCAExporter::getPreviousEditions();
     	foreach($versions as $key => $version) {
     		$versions[$key]['url'] = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/' . $versions[$key]['url'];
     	}
+    	$this->view->versions = $versions;
     }
     
     private function _getValue($value)
