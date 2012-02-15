@@ -1,0 +1,34 @@
+<?php echo $this->xmlheader; ?>
+
+<sp2000>
+	<request>
+		<service id='getversions'></service>
+		<description>
+			i4Life download service to retrieve the versions available for download.
+		</description>
+		<parameters>
+<?php foreach($this->params as $param => $value): ?>
+			<<?php echo $param; ?>><?php echo $value; ?></<?php echo $param; ?>>
+<?php endforeach; ?>
+		</parameters>
+		<date><?php echo $this->date; ?></date>
+	</request>
+	<response>
+<?php if(isset($this->error)): ?>
+		<error><?php echo $this->error; ?></error>
+<?php else: ?>
+		<versions>
+<?php foreach ($this->versions as $version): ?>
+			<version>
+				<edition><?php echo $version['edition']; ?></edition>
+				<size><?php echo $version['size']; ?></size>
+				<url><?php echo $version['url']; ?></url>
+			</version>
+<?php endforeach; ?>
+		</versions>
+<?php endif; ?>
+	</response>
+<?php if(!isset($this->error)): ?>
+	<status code='0'>Success</status>
+<?php endif; ?>
+</sp2000>

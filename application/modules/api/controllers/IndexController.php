@@ -119,13 +119,15 @@ class IndexController extends BaseController
 		exec( "$command", $arrOutput );
     }
     
-    public function getVersionsAction ()
+    public function getversionsAction ()
     {
-    	$versions = array (
-    		'bs_v19',
-			'deze_bestaaat_niet_echt'
-    	);
-    	return json_encode($versions);
+    	$this->_helper->layout->disableLayout();
+    	$this->view->params = $this->_getAllParams();
+    	$this->view->date = date('d M Y H:i:s e');
+    	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
+    	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
+    	
+    	$this->view->versions = DCAExporter::getPreviousEditions();
     }
     
     private function _getValue($value)
