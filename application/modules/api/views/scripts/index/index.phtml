@@ -40,39 +40,69 @@
 	</form>
 </p>
 
-<h2>Description of currently available web services</h2>
+<h2>Partial Download Service</h2>
 <h3>Description</h3>
 <p>
 	Retrieves the URL of a zipped archive containing information about a current taxon
 	and its children. The web service can give three export or block options.
 </p>
 
-<h3>Block options</h3>
+<h3>Field set options</h3>
 <p>
-	Block 1: Classification only. Exports the higher classification exclusively, without
+	Classification only: Exports the higher classification exclusively, without
 	species. Just from kingdom (or any selected taxa) down to genus.
 </p>
 <p>
-	Block 2: Limited data. Exports accepted scientific name linked to references,
+	Limited data: Exports accepted scientific name linked to references,
 	synonym(s) linked to reference(s), latest taxonomic scrutiny, source database and
 	Catalogue of Life edition, classification above genus and LSID.
 </p>
 <p>
-	Block 3: Complete data. Exports fields as defined under 'Limited data', plus common
+	Complete data: Exports fields as defined under 'Limited data', plus common
 	name(s) linked to reference(s), distribution, life zone and additional data.
 </p>
 
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	[domain]/api/index/retrieveUrl/[loop][rank]/taxonName/[endLoop]/block/[blockLevel].
+	[domain]/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
 	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family
-	and genus. An example is:
-	http://dev.4d4life.eu/DS1.2/api/index/retrieveUrl/kingdom/Animalia/phylum/Chordata/class/Aves/block/1
+	and genus. The following field sets are allowed: classification_only (default), limited_data, complete_data. A key is required. An example is:
+	http://dev.4d4life.eu/DS1.2/partialdownloadservice/kingdom/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
 </p>
 <p>
 	The web service will return the URL that is/or will be available to download, plus a
 	boolean whether the URL is already accessible. As the zip file can take some time to
 	create, you will have to poll the web service from time to time to check if the zip
 	file has been created and the URL is accessible.
+</p>
+
+<h2>Complete Download Service</h2>
+<h3>Description</h3>
+<p>
+	Retrieves the URL of a zipped archive containing information about all taxa.
+</p>
+
+<h3>Usage</h3>
+<p>
+	Use the following syntax to query this web service:
+	[domain]/completedownloadservice/key/[key]/version/[version].
+	A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
+	http://dev.4d4life.eu/DS1.2/partialdownloadservice/kingdom/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
+</p>
+<p>
+	The web service will return the URL that is available to download.
+</p>
+
+<h2>List Releases</h2>
+<h3>Description</h3>
+<p>
+	Retrieves the URLs, the size and version of zipped archives containing information about the full database.
+</p>
+
+<h3>Usage</h3>
+<p>
+	Use the following syntax to query this web service:
+	[domain]/listreleases/key/[key]. A key is required. An example is:
+	http://dev.4d4life.eu/DS1.2/getversions/key/740d4b20592c631d226488f5455d4cb6
 </p>

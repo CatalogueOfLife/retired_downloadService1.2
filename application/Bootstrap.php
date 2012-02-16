@@ -129,13 +129,24 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     		)
     	);
     	$router->addRoute(
-    		'getversions',
-    		new Zend_Controller_Router_Route_Static(
-    			'getversions',
+    		'completedownloadservice',
+    		new Zend_Controller_Router_Route(
+    			'completedownloadservice/*',
     			array(
     				'module' => 'api',
     				'controller' => 'index',
-    				'action' => 'getversions'
+    				'action' => 'completedownloadservice'
+    			)
+    		)
+    	);
+    	$router->addRoute(
+    		'listreleases',
+    		new Zend_Controller_Router_Route(
+    			'listreleases/*',
+    			array(
+    				'module' => 'api',
+    				'controller' => 'index',
+    				'action' => 'listreleases'
     			)
     		)
     	);

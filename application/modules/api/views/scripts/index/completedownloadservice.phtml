@@ -1,0 +1,29 @@
+<?php echo $this->xmlheader; ?>
+
+<sp2000>
+	<request>
+		<service id='fulldownloadservice'></service>
+		<description>
+			i4Life download service to retrieve the Catalogue of Life
+			as DwC-a file.
+		</description>
+		<parameters>
+<?php foreach($this->params as $param => $value): ?>
+			<<?php echo $param; ?>><?php echo $value; ?></<?php echo $param; ?>>
+<?php endforeach; ?>
+		</parameters>
+		<date><?php echo $this->date; ?></date>
+		<catalogue_version><?php echo $this->version; ?></catalogue_version>
+	</request>
+	<response>
+<?php if(isset($this->error)): ?>
+		<error><?php echo $this->error; ?></error>
+<?php else: ?>
+		<downloadurl><?php echo $this->url; ?></downloadurl>
+		<size><?php echo $this->size; ?></size>
+<?php endif; ?>
+	</response>
+<?php if(!isset($this->error)): ?>
+	<status code='0'>Success</status>
+<?php endif; ?>
+</sp2000>
