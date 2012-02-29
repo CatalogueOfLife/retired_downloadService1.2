@@ -27,7 +27,7 @@ class IndexController extends BaseController
     	$superfamily = $this->_getParam('superfamily');
     	$family = $this->_getParam('family');
     	$genus = $this->_getParam('genus');
-    	$this->view->params = $this->_getAllParams();
+    	$this->view->params = $this->_getUserInputParams();
 		$this->view->date = $this->_getDate();
     	$this->view->xmlheader = '<?xml version="1.0" encoding="UTF-8"?>';
     	
@@ -137,7 +137,7 @@ class IndexController extends BaseController
 /*    	$block = $this->_getParam('block');
     	$fieldSet = $this->_getParam('field_set');*/
 
-    	$this->view->params = $this->_getAllParams();
+    	$this->view->params = $this->_getUserInputParams();
     	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
     	
@@ -204,7 +204,7 @@ class IndexController extends BaseController
     public function listreleasesAction ()
     {
     	$this->_helper->layout->disableLayout();
-    	$this->view->params = $this->_getAllParams();
+    	$this->view->params = $this->_getUserInputParams();
     	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
 
@@ -228,6 +228,20 @@ class IndexController extends BaseController
     		$versions[$key]['url'] = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/' . $versions[$key]['url'];
     	}
     	$this->view->versions = $versions;
+    }
+    
+    private function _getUserInputParams() {
+    	$params = $this->_getAllParams();
+    	if(isset($params['module'])) {
+    		unset($params['module']);
+    	}
+    	if(isset($params['controller'])) {
+    		unset($params['controller']);
+    	}
+    	    	if(isset($params['action'])) {
+    		unset($params['action']);
+    	}
+    	return $params;
     }
     
     private function _getDate () {
