@@ -27,10 +27,9 @@ class IndexController extends BaseController
     	$superfamily = $this->_getParam('superfamily');
     	$family = $this->_getParam('family');
     	$genus = $this->_getParam('genus');
-
     	$this->view->params = $this->_getAllParams();
     	$this->view->version = $version;
-    	$this->view->date = date('d M Y H:i:s e');
+		$this->view->date = $this->_getDate();
     	$this->view->xmlheader = '<?xml version="1.0" encoding="UTF-8"?>';
     	
     	//Check for registration key
@@ -134,7 +133,7 @@ class IndexController extends BaseController
 
     	$this->view->params = $this->_getAllParams();
     	$this->view->version = $version;
-    	$this->view->date = date('d M Y H:i:s e');
+    	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
     	
     	//Check for registration key
@@ -199,7 +198,7 @@ class IndexController extends BaseController
     {
     	$this->_helper->layout->disableLayout();
     	$this->view->params = $this->_getAllParams();
-    	$this->view->date = date('d M Y H:i:s e');
+    	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
 
     	$key = $this->_getParam('key');
@@ -222,6 +221,11 @@ class IndexController extends BaseController
     		$versions[$key]['url'] = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/' . $versions[$key]['url'];
     	}
     	$this->view->versions = $versions;
+    }
+    
+    private function _getDate () {
+		$gmt = ' GMT'.(substr(date('O'),2,1) == 0 ? '' : substr(date('O'),0,1).substr(date('O'),2,1));
+    	return date('d M Y H:i:s') . $gmt;
     }
     
     private function _getVersions () {
