@@ -38,7 +38,7 @@ class IndexController extends BaseController
     	}
     	//Check if the key exists
     	if(!$this->_checkKeyExists($key)) {
-    		$this->view->error = 'the given key does not exists';
+    		$this->view->error = 'the given key does not exist';
     		return;
     	}
 
@@ -50,7 +50,6 @@ class IndexController extends BaseController
 		if($fieldSet) {
 			switch ($fieldSet) {
 				case 'classification_only':
-				default:
 					$block = 1;
 					break;
 				case 'limited_data':
@@ -59,11 +58,18 @@ class IndexController extends BaseController
 				case 'complete_data':
 					$block = 3;
 					break;
+				default:
+					$block = false;
+					
+			}
+			if($block == false) {
+	    		$this->view->error = 'the given field_set does not exist';
+	    		return;
 			}
 			$_REQUEST['block'] = $block;
 		}
         if(!$block) {
-            $block = 1;
+            $block = 3;
             $_REQUEST['block'] = $block;
         }
         if(!$kingdom && !$phylum && !$class && $order && !$superfamily && $family && $genus) {
