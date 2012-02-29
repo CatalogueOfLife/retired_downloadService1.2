@@ -50,7 +50,7 @@
 <h3>Field set options</h3>
 <p>
 	Classification only: Exports the higher classification exclusively, without
-	species. Just from kingdom (or any selected taxa) down to genus.
+	species. Just from toplevelgroup (or any selected taxa) down to genus.
 </p>
 <p>
 	Limited data: Exports accepted scientific name linked to references,
@@ -66,9 +66,9 @@
 <p>
 	Use the following syntax to query this web service:
 	[domain]/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
-	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family
+	The domain is required, this is the domain of the webservice. The following ranks are allowed: kingdom, phylum, class, order, superfamily, family
 	and genus. The following field sets are allowed: classification_only (default), limited_data, complete_data. A key is required. An example is:
-	http://dev.4d4life.eu/DS1.2/partialdownloadservice/kingdom/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
+	http://dev.4d4life.eu/DS1.2/partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
 </p>
 <p>
 	The web service will return the URL that is/or will be available to download, plus a
@@ -87,7 +87,7 @@
 <p>
 	Use the following syntax to query this web service:
 	[domain]/completedownloadservice/key/[key]/version/[version].
-	A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
+	The domain is required, this is the domain of the webservice. A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
 	http://dev.4d4life.eu/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
 </p>
 <p>
@@ -104,5 +104,6 @@
 <p>
 	Use the following syntax to query this web service:
 	[domain]/listreleases/key/[key]. A key is required. An example is:
+	The domain is required, this is the domain of the webservice. A key is required.
 	http://dev.4d4life.eu/DS1.2/listreleases/key/740d4b20592c631d226488f5455d4cb6
 </p>

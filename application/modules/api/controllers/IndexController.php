@@ -20,7 +20,7 @@ class IndexController extends BaseController
     	$version = $this->_getParam('version');
     	$block = $this->_getParam('block');
     	$fieldSet = $this->_getParam('field_set');
-    	$kingdom = $this->_getParam('kingdom');
+    	$kingdom = $this->_getParam('toplevelgroup');
     	$phylum = $this->_getParam('phylum');
     	$class = $this->_getParam('class');
     	$order = $this->_getParam('order');
