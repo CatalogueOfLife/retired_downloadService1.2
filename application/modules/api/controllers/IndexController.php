@@ -31,7 +31,7 @@ class IndexController extends BaseController
     	$this->view->params = $this->_getAllParams();
     	$this->view->version = $version;
     	$this->view->date = date('d M Y H:i:s e');
-    	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
+    	$this->view->xmlheader = '<?xml version="1.0" encoding="UTF-8"?>';
     	
     	//Check for registration key
     	if(!isset($key)) {
