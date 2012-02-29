@@ -28,7 +28,6 @@ class IndexController extends BaseController
     	$family = $this->_getParam('family');
     	$genus = $this->_getParam('genus');
     	$this->view->params = $this->_getAllParams();
-    	$this->view->version = $version;
 		$this->view->date = $this->_getDate();
     	$this->view->xmlheader = '<?xml version="1.0" encoding="UTF-8"?>';
     	
@@ -42,9 +41,10 @@ class IndexController extends BaseController
     		$this->view->error = 'the given key does not exists';
     		return;
     	}
-    	
+
     	//Get version
     	$version = $this->_checkVersionAction($version);
+    	$this->view->version = $version;
     	
 //    	$_REQUEST = $this->_getAllParams();
 		if($fieldSet) {
@@ -132,7 +132,6 @@ class IndexController extends BaseController
     	$fieldSet = $this->_getParam('field_set');*/
 
     	$this->view->params = $this->_getAllParams();
-    	$this->view->version = $version;
     	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
     	
@@ -184,8 +183,10 @@ class IndexController extends BaseController
 			foreach($versionSortByDate as $value) {
 		        $this->view->url = $value['url'] = Bootstrap::instance()->getOption('includePaths.AC_DCA_ExporterBaseUrl') . '/' . $value['url'];
 		    	$this->view->size = $value['size'];
+		    	$version = $value['edition'];
 			}
     	}
+    	$this->view->version = $version;
     	
 /*    	$frontController = Zend_Controller_Front::getInstance();
 		$frontController->setParam('disableOutputBuffering', true);
@@ -248,11 +249,19 @@ class IndexController extends BaseController
     private function _checkVersionAction ($version)
     {
     	//Check if the given version exists.
-    	if($version) {
-	    	return $version;
-    	} else {
-    		return null;
+    	if(!$version || $version == '') {
+	    	$versions = $this->_getVersions();
+	    	$versionExist = false;
+	    	$versionSortByDate = array();
+	    	foreach ($versions as $value) {
+	    		$versionSortByDate[strtotime($value['edition'])] = $value;
+	    	}
+	    	ksort($versionSortByDate);
+			foreach($versionSortByDate as $value) {
+		        $version = $value['edition'];
+			}
     	}
+		return $version;
     }
     
     private function _checkKeyExists ($key) {
