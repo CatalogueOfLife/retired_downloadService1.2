@@ -8,9 +8,9 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php echo $_SERVER['SERVER_ADDR'];?>/completedownloadservice/key/[key]/version/[version].
+	http://<?php echo $_SERVER['HTTP_HOST'];?>/completedownloadservice/key/[key]/version/[version].
 	A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
-	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
+	http://<?php echo $_SERVER['HTTP_HOST'];?>/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
 </p>
 <p>
 	The web service will return the URL that is available to download.
