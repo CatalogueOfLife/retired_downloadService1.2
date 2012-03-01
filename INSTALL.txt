@@ -1,0 +1,33 @@
+This document explains how to install the webservice for the Download Service 1.2.
+In order to work, you will need a working version of the DCA exporter.
+You will need to setup a database, this is only for the storage of the key.
+If you already got a database for key storage, you could use that one.
+
+1) Export from svn.
+Receive the application by exporting it from svn, this can be done by the following location:
+svn://dev.4d4life.eu/downloadService1.2/<version>
+Please replace the version with the version you want to work with, this could be the trunk, a tag or a branch.
+example: svn://dev.4d4life.eu/downloadService1.2/trunk
+
+2) Configuring the webservice
+Copy or rename the file public/.htaccess.tpl to public/.htaccess
+Change @BASE_URL@ to the base url or leave empty when no rewrite base is needed.
+
+Copy or renmae the file application/configs/application.xml.tpl to application/configs/application.xml
+There are 8 variables that you need to change in this script.
+line 20: @PATH_TO_AC_DCA_EXPORTER@, change this to the path where the DCA exporter lives.
+line 21: @BASE_URL_TO_AC_DCA_EXPORTER@, change this to the url where the DCA exporter lives.
+line 22: @PHP_LOCATION@, this is used to call php, normally "php" should be enough here.
+line 23: @BASE_PATH@, change this to the base path.
+line 71: @DBHOST@, change this to the host address of the database, default is localhost
+line 72: @DBUSER@, change this to the username of the database, default is root
+line 73: @DBPASS@, change this to the password of the database
+line 74: @DBNAME@, change this to the name of the database.
+
+3) Import database structure
+You will need a database to store your keys.
+If the database is already present, skip this part.
+Create a mysql database and import the database structure, this can be found in application/data/db/key_store.sql
+
+4) Configure apache
+Create a virtual host to the public folder in this application in the apache configuration, see README.txt for an example.

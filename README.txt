@@ -1,11 +1,10 @@
 README
 ======
 
-This directory should be used to place project specfic documentation including
-but not limited to project notes, generated API/phpdoc documentation, or 
-manual files generated or hand written.  Ideally, this directory would remain
-in your development environment only and should not be deployed with your
-application to it's final production location.
+This webservice allows you to retrieve urls created by the DCA exporter.
+It has a partialdownload service, that you can use to get a section of the full data (for example, only birds).
+It has a completedownload service, that allows you to retrieve the full data of multiple versions.
+It has a retrievelist service, that allows you to retrieve all the versions that are availble for download.
 
 
 Setting Up Your VHOST
