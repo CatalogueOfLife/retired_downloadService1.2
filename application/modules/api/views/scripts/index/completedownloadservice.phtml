@@ -1,3 +1,21 @@
+<?php if($this->showDescription == true): ?>
+<h2>Complete Download Service</h2>
+<h3>Description</h3>
+<p>
+	Retrieves the URL of a zipped archive containing information about all taxa.
+</p>
+
+<h3>Usage</h3>
+<p>
+	Use the following syntax to query this web service:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/completedownloadservice/key/[key]/version/[version].
+	A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
+</p>
+<p>
+	The web service will return the URL that is available to download.
+</p>
+<?php else: ?>
 <?php echo $this->xmlheader; ?>
 
 <sp2000>
@@ -27,3 +45,4 @@
 	<status code='0'>Success</status>
 <?php endif; ?>
 </sp2000>
+<?php endif; ?>

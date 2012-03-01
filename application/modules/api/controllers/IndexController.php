@@ -10,7 +10,6 @@ class IndexController extends BaseController
     
     public function partialdownloadserviceAction ()
     {
-    	$this->_helper->layout->disableLayout();
 //		$this->_helper->viewRenderer->setNoRender(TRUE);
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
     	
@@ -30,6 +29,16 @@ class IndexController extends BaseController
     	$this->view->params = $this->_getUserInputParams();
 		$this->view->date = $this->_getDate();
     	$this->view->xmlheader = '<?xml version="1.0" encoding="UTF-8"?>';
+    	
+    	//Check if a rank is given
+    	if(!isset($kingdom) && !isset($phylum) && !isset($class) && !isset($order) && 
+    	  !isset($superfamily) && !isset($family) && !isset($genus)) {
+    		$this->view->showDescription = true;
+    		return;
+    	} else {
+    		$this->view->showDescription = false;
+    		$this->_helper->layout->disableLayout();
+    	}
     	
     	//Check for registration key
     	if(!isset($key)) {
@@ -126,7 +135,6 @@ class IndexController extends BaseController
     
     public function completedownloadserviceAction ()
     {
-    	$this->_helper->layout->disableLayout();
 //		$this->_helper->viewRenderer->setNoRender(TRUE);
     	include_once Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter') . '/DCAExporter.php';
     	
@@ -140,6 +148,15 @@ class IndexController extends BaseController
     	$this->view->params = $this->_getUserInputParams();
     	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
+    	
+		//Check if user input is given.
+    	if(!isset($key) && !isset($version)) {
+    		$this->view->showDescription = true;
+    		return;
+    	} else {
+    		$this->view->showDescription = false;
+    		$this->_helper->layout->disableLayout();
+    	}
     	
     	//Check for registration key
     	if(!isset($key)) {
@@ -203,17 +220,21 @@ class IndexController extends BaseController
     	
     public function listreleasesAction ()
     {
-    	$this->_helper->layout->disableLayout();
     	$this->view->params = $this->_getUserInputParams();
     	$this->view->date = $this->_getDate();
     	$this->view->xmlheader = "<?xml version='1.0' encoding='utf-8'?>";
 
     	$key = $this->_getParam('key');
-    	//Check for registration key
+    	
+		//Check if user input is given.
     	if(!isset($key)) {
-    		$this->view->error = 'no key given';
+    		$this->view->showDescription = true;
     		return;
+    	} else {
+    		$this->view->showDescription = false;
+    		$this->_helper->layout->disableLayout();
     	}
+
     	//Check if the key exists
     	if(!$this->_checkKeyExists($key)) {
     		$this->view->error = 'the given key does not exist';

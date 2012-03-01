@@ -1,3 +1,18 @@
+<?php if($this->showDescription == true): ?>
+<h2>List Releases</h2>
+<h3>Description</h3>
+<p>
+	Retrieves the URLs, the size and version of zipped archives containing information about the full database.
+</p>
+
+<h3>Usage</h3>
+<p>
+	Use the following syntax to query this web service:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/listreleases/key/[key]. A key is required. An example is:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/listreleases/key/740d4b20592c631d226488f5455d4cb6
+</p>
+
+<? else: ?>
 <?php echo $this->xmlheader; ?>
 
 <sp2000>
@@ -28,3 +43,4 @@
 	<status code='0'>Success</status>
 <?php endif; ?>
 </sp2000>
+<?php endif; ?>

@@ -1,3 +1,42 @@
+<?php if($this->showDescription == true): ?>
+<h2>Partial Download Service</h2>
+<h3>Description</h3>
+<p>
+	Retrieves the URL of a zipped archive containing information about a selected taxon
+	and its children. The web service provides three ‘field set’ (or ‘block’) options.
+</p>
+
+<h3>Field set options</h3>
+<p>
+	Classification only: Exports the higher classification exclusively, without species.
+	Just from top level group (or any selected taxon) down to genus.
+</p>
+<p>
+	Limited data: Exports accepted scientific name linked to references, synonym(s)
+	linked to reference(s), latest taxonomic scrutiny, source database and Catalogue
+	of Life edition, classification above genus and LSID.
+</p>
+<p>
+	Complete data: Exports fields as defined under 'Limited data', plus common name(s)
+	linked to reference(s), distribution, lifezone and additional data.
+</p>
+
+<h3>Usage</h3>
+<p>
+	Use the following syntax to query this web service:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
+	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family and genus.
+	The following field sets are allowed: classification_only, limited_data, complete_data (default).
+	A key is required. An example is:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
+</p>
+<p>
+	The web service will return the URL that is/or will be available to download, plus a
+	boolean whether the URL is already accessible. As the zip file can take some time to
+	create, you will have to poll the web service from time to time to check if the zip
+	file has been created and the URL is accessible.
+</p>
+<?php else: ?>
 <?php echo $this->xmlheader; ?>
 
 <sp2000>
@@ -28,3 +67,4 @@
 	<status code='0'>Success</status>
 <?php endif; ?>
 </sp2000>
+<?php endif; ?>

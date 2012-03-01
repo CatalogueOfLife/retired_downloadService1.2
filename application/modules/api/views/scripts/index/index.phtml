@@ -43,32 +43,33 @@
 <h2>Partial Download Service</h2>
 <h3>Description</h3>
 <p>
-	Retrieves the URL of a zipped archive containing information about a current taxon
-	and its children. The web service can give three export or block options.
+	Retrieves the URL of a zipped archive containing information about a selected taxon
+	and its children. The web service provides three ‘field set’ (or ‘block’) options.
 </p>
 
 <h3>Field set options</h3>
 <p>
-	Classification only: Exports the higher classification exclusively, without
-	species. Just from toplevelgroup (or any selected taxa) down to genus.
+	Classification only: Exports the higher classification exclusively, without species.
+	Just from top level group (or any selected taxon) down to genus.
 </p>
 <p>
-	Limited data: Exports accepted scientific name linked to references,
-	synonym(s) linked to reference(s), latest taxonomic scrutiny, source database and
-	Catalogue of Life edition, classification above genus and LSID.
+	Limited data: Exports accepted scientific name linked to references, synonym(s)
+	linked to reference(s), latest taxonomic scrutiny, source database and Catalogue
+	of Life edition, classification above genus and LSID.
 </p>
 <p>
-	Complete data: Exports fields as defined under 'Limited data', plus common
-	name(s) linked to reference(s), distribution, life zone and additional data.
+	Complete data: Exports fields as defined under 'Limited data', plus common name(s)
+	linked to reference(s), distribution, lifezone and additional data.
 </p>
 
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php var_dump($_SERVER['SERVER_ADDR']);?>/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
-	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family
-	and genus. The following field sets are allowed: classification_only, limited_data, complete_data (default). A key is required. An example is:
-	http://<?php var_dump($_SERVER['SERVER_ADDR']);?>/DS1.2/partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
+	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family and genus.
+	The following field sets are allowed: classification_only, limited_data, complete_data (default).
+	A key is required. An example is:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
 </p>
 <p>
 	The web service will return the URL that is/or will be available to download, plus a
@@ -86,9 +87,9 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php var_dump($_SERVER['SERVER_ADDR']);?>/completedownloadservice/key/[key]/version/[version].
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/completedownloadservice/key/[key]/version/[version].
 	A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
-	http://<?php var_dump($_SERVER['SERVER_ADDR']);?>/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
 </p>
 <p>
 	The web service will return the URL that is available to download.
@@ -103,7 +104,6 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php var_dump($_SERVER['SERVER_ADDR']);?>/listreleases/key/[key]. A key is required. An example is:
-	A key is required.
-	http://<?php var_dump($_SERVER['SERVER_ADDR']);?>/DS1.2/listreleases/key/740d4b20592c631d226488f5455d4cb6
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/listreleases/key/[key]. A key is required. An example is:
+	http://<?php echo $_SERVER['SERVER_ADDR'];?>/DS1.2/listreleases/key/740d4b20592c631d226488f5455d4cb6
 </p>
