@@ -68,10 +68,10 @@
 			<multidb>
 				<db1>
 					<adapter>pdo_mysql</adapter>
-					<host>localhost</host>
-					<username>root</username>
-					<password></password>
-					<dbname>col_webservices</dbname>
+					<host>@DBHOST@</host>
+					<username>@DBUSER@</username>
+					<password>@DBPASS@</password>
+					<dbname>@DBNAME@</dbname>
 				</db1>
 			</multidb>
 		</resources>
