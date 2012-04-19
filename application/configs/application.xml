@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+
+	<!-- 
+		WARNING: Watch out when formatting this file, because all tags
+		specifying some file or path must be on a single line without spaces. 
+	  -->
+
+	<!--  P R O D U C T I O N  -->
+	<production>
+
+		<phpSettings>
+			<display_startup_errors>1</display_startup_errors>
+			<display_errors>1</display_errors>
+			<error_reporting>1</error_reporting>
+		</phpSettings>
+
+		<includePaths>
+			<library><zf:const zf:name="APPLICATION_PATH" />/../library</library>
+			<AC_DCA_Exporter>/home/dseijts/Zend/workspaces/DefaultWorkspace7/AC_DCA_export</AC_DCA_Exporter>
+			<AC_DCA_ExporterBaseUrl>http://localhost/ACDCA</AC_DCA_ExporterBaseUrl>
+			<PHPLocation>/usr/bin/php5</PHPLocation>
+			<basePath>/home/dseijts/Zend/workspaces/DefaultWorkspace7/ETI_REST</basePath>
+		</includePaths>
+
+		<bootstrap>
+			<path><zf:const zf:name="APPLICATION_PATH" />/Bootstrap.php</path>
+			<class>Bootstrap</class>
+		</bootstrap>
+
+		<resources>
+			<!-- FRONT CONTROLLER -->
+			<frontController>
+				<moduleDirectory><zf:const zf:name="APPLICATION_PATH" />/modules</moduleDirectory>
+				<defaultModule>api</defaultModule>
+				<moduleControllerDirectoryName>controllers</moduleControllerDirectoryName>
+				<params>
+					<displayExceptions>1</displayExceptions>
+				</params>
+				<!--
+					You need to specify the baseUrl when accessing your application
+					through an Apache alias or when your virtual host's document root
+					does not point to the public directory. You will also have to set
+					the RewriteBase in .htaccess then.
+				-->
+				<baseUrl>/I4LifeWS/</baseUrl>
+			</frontController>
+
+			<!-- LAYOUT -->
+			<layout>
+				<layout>layout</layout>
+				<layoutPath><zf:const zf:name="APPLICATION_PATH" />/layouts/scripts</layoutPath>
+			</layout>
+
+			<!-- LOGGING -->
+			<log>
+				<stream>
+					<writerName>Firebug</writerName>
+				</stream>
+			</log>
+
+			<!-- LOCALE -->
+			<locale>
+				<default>en_US</default>
+			</locale>
+
+			<!-- DATABASE -->
+			<multidb>
+				<db1>
+					<adapter>pdo_mysql</adapter>
+					<host>localhost</host>
+					<username>root</username>
+					<password>root</password>
+					<dbname>col_webservices</dbname>
+				</db1>
+			</multidb>
+		</resources>
+
+		<constants>
+			<version>
+				<major>0</major>
+				<minor>001</minor>
+			</version>
+		</constants>
+	</production>
+
+
+	<!--  T E S T  -->
+	<test zf:extends="production" />
+
+
+	<!--  D E V E L O P M E N T  -->
+	<development zf:extends="production">
+		<phpSettings>
+			<display_startup_errors>1</display_startup_errors>
+			<display_errors>1</display_errors>
+			<error_reporting>1</error_reporting>
+		</phpSettings>
+		<resources>
+			<!-- FRONT CONTROLLER -->
+			<frontController>
+				<params>
+					<displayExceptions>1</displayExceptions>
+				</params>
+				<!--
+					You need to specify the baseUrl when accessing your application
+					through an Apache alias or when your virtual host's document root
+					does not point to the public directory. You will also have to set
+					the RewriteBase in .htaccess then.
+				-->
+				<baseUrl></baseUrl>
+			</frontController>
+		</resources>
+	</development>
+
+
+</application>
+
