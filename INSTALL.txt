@@ -24,6 +24,9 @@ line 20: @PATH_TO_AC_DCA_EXPORTER@		change this to the path where the DCA export
 line 21: @BASE_URL_TO_AC_DCA_EXPORTER@	change this to the url where the DCA exporter lives, example "http://dev.4d4life.eu/DCAExporter".
 line 22: @PHP_LOCATION@					this is used to call php, normally "php" should be enough here. example "php".
 line 23: @BASE_PATH@					change this to the base path. example "/var/www/DownloadService1.2".
+
+line 46: @BASE_URL@						to the base url or leave empty when no rewrite base is needed.
+
 The following database settings are only for the key database!
 line 71: @DBHOST@						change this to the host address of the database, default is localhost, example "localhost".
 line 72: @DBUSER@						change this to the username of the database, default is root, example "root".
