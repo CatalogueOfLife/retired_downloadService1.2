@@ -43,7 +43,7 @@
 					does not point to the public directory. You will also have to set
 					the RewriteBase in .htaccess then.
 				-->
-				<baseUrl></baseUrl>
+				<baseUrl>@BASE_URL@</baseUrl>
 			</frontController>
 
 			<!-- LAYOUT -->
