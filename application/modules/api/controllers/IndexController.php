@@ -130,7 +130,7 @@ class IndexController extends BaseController
         $newUrl .= $this->_getValue($genus);
         $newUrl .= $this->_getValue(Bootstrap::instance()->getOption('includePaths.AC_DCA_Exporter'));
         
-    	$command = "$phpLocation $newUrl > /dev/null & $AC_DCA_Exporter";
+    	$command = "$phpLocation $newUrl > /dev/null &";
 		exec( "$command", $arrOutput );
     }
     
