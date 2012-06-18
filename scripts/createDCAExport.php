@@ -1,7 +1,7 @@
 <?php 
 $path = $argv[9];
 //include_once '/home/dseijts/Zend/workspaces/DefaultWorkspace7/AC_DCA_export/DCAExporter.php';
-include_once $path.'/DCAExporter.php';
+include_once $path.'DCAExporter.php';
 /*$block = $this->_getParam('block');
 $_REQUEST = $this->_getAllParams();*/
 $arguments = count($argv);
