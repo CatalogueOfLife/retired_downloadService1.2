@@ -65,11 +65,11 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php echo $_SERVER['HTTP_HOST'];?>/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
+	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>/partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
 	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family and genus.
 	The following field sets are allowed: classification_only, limited_data, complete_data (default).
 	A key is required. An example is:
-	http://<?php echo $_SERVER['HTTP_HOST'];?>/DS1.2/partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited_data/key/740d4b20592c631d226488f5455d4cb6
+	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>/partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited_data/key/740d4b20592c631d226488f5455d4cb6
 </p>
 <p>
 	The web service will return the URL that is/or will be available to download, plus a
@@ -87,9 +87,9 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php echo $_SERVER['HTTP_HOST'];?>/completedownloadservice/key/[key]/version/[version].
+	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>/completedownloadservice/key/[key]/version/[version].
 	A key is required. A version is optional, to know witch versions are available, use the List Releases webservice. An example is:
-	http://<?php echo $_SERVER['HTTP_HOST'];?>/DS1.2/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
+	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>/completedownloadservice/key/740d4b20592c631d226488f5455d4cb6/version/1 January 2012
 </p>
 <p>
 	The web service will return the URL that is available to download.
@@ -104,6 +104,6 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php echo $_SERVER['HTTP_HOST'];?>/listreleases/key/[key]. A key is required. An example is:
-	http://<?php echo $_SERVER['HTTP_HOST'];?>/DS1.2/listreleases/key/740d4b20592c631d226488f5455d4cb6
+	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>/listreleases/key/[key]. A key is required. An example is:
+	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>/listreleases/key/740d4b20592c631d226488f5455d4cb6
 </p>
