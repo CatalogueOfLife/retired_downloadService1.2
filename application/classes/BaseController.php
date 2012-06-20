@@ -19,7 +19,7 @@ class BaseController extends Zend_Controller_Action
 
     public function init ()
     {
-    	$this->view->baseUrl = 'test';
+    	$this->view->baseUrl = Bootstrap::instance()->getOption('resources.frontController.baseUrl');
         $this->_messenger = Bootstrap::instance()->getMessenger();
         $this->_menu = Bootstrap::instance()->getMenu();
         $this->_redirector = $this->_helper->getHelper('Redirector');
