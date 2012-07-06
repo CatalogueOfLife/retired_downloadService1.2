@@ -24,11 +24,11 @@
 <h3>Usage</h3>
 <p>
 	Use the following syntax to query this web service:
-	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
+	http://<?php echo $_SERVER['HTTP_REFERER'];?><?php echo $this->baseUrl; ?>partialdownloadservice/[loop][rank]/[taxonName]/[endLoop]/field_set/[fieldSet]/key/[key].
 	The following ranks are allowed: kingdom, phylum, class, order, superfamily, family and genus.
 	The following field sets are allowed: classification_only, limited_data, complete_data (default).
 	A key is required. An example is:
-	http://<?php echo $_SERVER['HTTP_HOST'];?><?php echo $this->baseUrl; ?>partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
+	http://<?php echo $_SERVER['HTTP_REFERER'];?><?php echo $this->baseUrl; ?>partialdownloadservice/toplevelgroup/Animalia/phylum/Chordata/class/Aves/field_set/limited/key/740d4b20592c631d226488f5455d4cb6
 </p>
 <p>
 	The web service will return the URL that is/or will be available to download, plus a
