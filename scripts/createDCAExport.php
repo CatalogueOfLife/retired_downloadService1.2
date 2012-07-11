@@ -1,12 +1,12 @@
 <?php 
 $path = $argv[9];
 //include_once '/home/dseijts/Zend/workspaces/DefaultWorkspace7/AC_DCA_export/DCAExporter.php';
-include_once $path.'DCAExporter.php';
+include_once $path.(substr($path, -1) == '/' ? '' : '/').'DCAExporter.php';
 /*$block = $this->_getParam('block');
 $_REQUEST = $this->_getAllParams();*/
 $arguments = count($argv);
 foreach($argv as $key => $value) {
-	if($key != 0 && $key != 1 && ($key+1) < $arguments) {
+	if($key != 0 && $key != 1 && $key != 9 && ($key+1) < $arguments) {
 		switch ($key) {
 			case 2:
 				$rank = 'kingdom';
@@ -39,7 +39,7 @@ foreach($argv as $key => $value) {
 		$_REQUEST['block'] = $value;
 	}
 }
-$DCAExporter = new DCAExporter($_REQUEST,$_REQUEST['block'],$version);
+$DCAExporter = new DCAExporter($_REQUEST,$_REQUEST['block']/*,$version*/);
 $errors = $DCAExporter->getStartUpErrors();
 if($DCAExporter->archiveExists()) {
 	echo "Archive already exists\n";

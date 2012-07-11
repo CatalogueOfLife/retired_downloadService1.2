@@ -29,6 +29,9 @@ class IndexController extends BaseController
     	$this->view->params = $this->_getUserInputParams();
 		$this->view->date = $this->_getDate();
     	$this->view->xmlheader = '<?xml version="1.0" encoding="UTF-8"?>';
+		$arr = array_reverse($_REQUEST, true);
+	    $arr['kingdom'] = $kingdom;
+	    $_REQUEST = array_reverse($arr, true); 
     	
     	//Check if a rank is given
     	if(!isset($kingdom) && !isset($phylum) && !isset($class) && !isset($order) && 
