@@ -1,27 +1,27 @@
 <?php
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
-    
+
     /**
      * @var Bootstrap
      */
     private static $_instance = null;
-    
+
     /**
      * @var Zend_Log
      */
     private $_logger;
-    
+
     /**
      * @var Zend_Session_Namespace
      */
     private $_session;
-    
+
     /**
      * @var ETI_Zend_Navigation_Container
      */
     private $_menu;
-    
+
     /**
      * @var ETI_Zend_Controller_Plugin_Messenger
      */
@@ -30,7 +30,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     /**
      * Convenience method to get a reference to The Bootstrap
      * singleton when not in an action.
-     * 
+     *
      * @return Bootstrap
      */
     public static function instance ()
@@ -113,7 +113,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $autoLoader->setDefaultAutoloader(array($loader,'autoload'));
         return $autoLoader;
     }
-    
+
     public function _initRouter ()
     {
     	$router = Zend_Controller_Front::getInstance()->getRouter();
@@ -166,25 +166,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
      */
     protected function _initView ()
     {
-        
+
         // need to bootstrap this one first b/c we need the baseUrl
         // to be set before using the BaseUrl view helper.
         $this->bootstrap('frontcontroller');
-        
+
         $view = new Zend_View();
         $view->doctype('XHTML1_STRICT');
         $view->headTitle($this->getOption('appInfo.htmlTitle'))->setSeparator(' - ');
-        
+
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
         $viewRenderer->setView($view);
-        
+
         $view->addHelperPath(APPLICATION_PATH . '/helpers/view');
-        
+
         $this->bootstrap('menu');
         $menu = $this->getResource('menu');
         $view->getHelper('navigation')->setContainer($menu);
         $view->getHelper('navigation')->menu()->setUlClass('sf-menu');
-        
+
         return $view;
     }
 
